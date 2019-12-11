@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf ./build",
-    "build": "npm run clean && tsc",
+    "hbs": "ncp ./src/app/views ./build/app/views",
+    "public": "ncp ./src/app/public ./build/app/public",
+    "build": "npm run clean && tsc && npm run hbs && npm run public",
     "dev": "ts-node src/index.ts",
     "start:dev": "nodemon src/index.ts --exec ts-node",
     "start": "node build/index.js"
@@ -16,13 +18,16 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
     "morgan": "^1.9.1",
+    "ncp": "^2.0.0",
     "promise-mysql": "^4.1.1",
     "rimraf": "^3.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.2",
+    "@types/express-handlebars": "^3.1.0",
     "@types/morgan": "^1.7.37",
     "nodemon": "^2.0.1",
     "ts-node": "^8.5.4",

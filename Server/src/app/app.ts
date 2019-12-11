@@ -1,8 +1,14 @@
 import express, { Application } from 'express';
+import exphbs from "express-handlebars";
 import morgan from 'morgan';
 import cors from 'cors';
+import path from 'path';
 
+//Importando Rutas
+import indexRouter from './Router/indexRouter';
+import gamesRouter from './Router/gamesRouter';
 export class Server {
+
 	public app: Application;
 	public port?: number | string;
 
@@ -16,6 +22,14 @@ export class Server {
 
 	private Config(): void {
 		this.app.set('port', this.port || process.env.PORT || 3000);
+		this.app.set("views", path.join(__dirname, "Views"));
+		this.app.engine(".hbs", exphbs({
+			layoutsDir: path.join(this.app.get("views"), "Layouts"),
+			partialsDir: path.join(this.app.get("views"), "Partials"),
+			defaultLayout: "main",
+			extname: ".hbs"
+		}));
+		this.app.set('view engine', '.hbs');
 	}
 
 	private Middleware() {
@@ -25,7 +39,11 @@ export class Server {
 		this.app.use(express.urlencoded({ extended: false }));
 	}
 
-	private Routes(): void {}
+	private Routes(): void {
+		this.app.use(express.static(path.join(__dirname, 'Public')));
+		this.app.use(indexRouter);
+		this.app.use('/api',gamesRouter)
+	}
 
 	public async Run() {
 		await this.app.listen(this.app.get('port'), () => {
