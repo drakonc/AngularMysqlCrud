@@ -42,7 +42,7 @@ export class Server {
 	private Routes(): void {
 		this.app.use(express.static(path.join(__dirname, 'Public')));
 		this.app.use(indexRouter);
-		this.app.use('/api',gamesRouter)
+		this.app.use('/api', gamesRouter)
 	}
 
 	public async Run() {
@@ -50,4 +50,5 @@ export class Server {
 			console.log(`Servidor Corriendo en el Puerto ${this.app.get('port')}`);
 		});
 	}
+
 }

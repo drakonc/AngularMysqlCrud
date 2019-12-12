@@ -9,9 +9,10 @@ class IndexRouter {
         this.ConfigRoute();
     }
 
-    private ConfigRoute() {
+    private ConfigRoute(): void {
         this.router.get('/', indexController.Index);
     }
+
 }
 
 const indexRouter = new IndexRouter();

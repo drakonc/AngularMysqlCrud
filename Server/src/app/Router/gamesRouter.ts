@@ -12,6 +12,7 @@ class GamesRouter {
     private ConfigRoute() {
         this.router.get('/games', gameController.GetGames);
     }
+
 }
 
 const gamesRouter = new GamesRouter();
