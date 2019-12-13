@@ -11,3 +11,5 @@ CREATE TABLE games(
 );
 
 DESCRIBE games;
+
+INSERT INTO games VALUES (0,'Titulo de Prueba','Descripcion de Peueba','Imagen de Prueba');
